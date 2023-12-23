@@ -82,8 +82,6 @@ function handleProductClick(event) {
     .querySelector('.gallery-image')
     .getAttribute('data-source');
 
-  const imgPreview = liEl.querySelector('.gallery-image').src;
-
   const imgAlt = liEl.querySelector('.gallery-image').alt;
 
   instance = basicLightbox
@@ -91,20 +89,16 @@ function handleProductClick(event) {
       `
   <div class="modal">
       <img class="modal-img" src="${imgOriginal}" data-source="${imgOriginal}" alt="${imgAlt}" />
-    </a>
   </div>
 `,
 
       {
         onShow: instance => {
-          document.onkeydown = function (event) {
+          document.addEventListener = function (event) {
             if (event.code === 'Escape') {
               instance.close();
             }
           };
-          document.addEventListener('click', function (event) {
-            event.preventDefault();
-          });
         },
       }
     )
